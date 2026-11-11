@@ -75,7 +75,9 @@ struct PTZJoystick: View {
                     let newDirection = PTZDirection.from(dx: dx, dy: dy, deadZone: radius * 0.25)
                     if newDirection != direction {
                         direction = newDirection
-                        onDirection(newDirection)
+                        // This camera's pan commands are mirrored, so the horizontal axis is flipped
+                        // to make "push right" turn the camera right (tested on the real camera).
+                        onDirection(newDirection?.adjusted(invertPan: true, invertTilt: false))
                     }
                 }
                 .onEnded { _ in

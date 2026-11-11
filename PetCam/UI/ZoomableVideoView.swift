@@ -76,7 +76,8 @@ struct ZoomableVideoView: UIViewRepresentable {
             switch gesture.state {
             case .began, .changed:
                 let t = gesture.translation(in: gesture.view)
-                let direction = PTZDirection.from(dx: -t.x, dy: -t.y, deadZone: 24)
+                // Horizontal drags the scene; vertical follows the finger (tested on the real camera).
+                let direction = PTZDirection.from(dx: -t.x, dy: t.y, deadZone: 24)
                 if direction != currentDirection {
                     currentDirection = direction
                     parent.onSteer(direction)
