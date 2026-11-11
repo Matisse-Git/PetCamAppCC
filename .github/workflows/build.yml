@@ -44,7 +44,11 @@ jobs:
           status=$?
           grep -E "(error|warning): " build.log | sort -u | head -150
           if [ $status -ne 0 ]; then
-            echo "::error::xcodebuild failed"
+            # Put all compiler errors into one annotation so they can be read without logging in.
+            errors=$(grep -E "error: " build.log | sed -E 's#^.*/PetCam/#PetCam/#' | sort -u | head -80)
+            if [ -z "$errors" ]; then errors=$(tail -40 build.log); fi
+            escaped=$(printf '%s' "$errors" | sed -e 's/%/%25/g' | awk 'BEGIN{ORS="%0A"} {print}' | sed -e 's/\r/%0D/g')
+            echo "::error title=Build errors::${escaped}"
             tail -80 build.log
             exit $status
           fi
