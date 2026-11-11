@@ -1,0 +1,49 @@
+name: PetCam
+options:
+  bundleIdPrefix: com.matissegit
+  deploymentTarget:
+    iOS: "26.0"
+  createIntermediateGroups: true
+  developmentLanguage: en
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+targets:
+  PetCam:
+    type: application
+    platform: iOS
+    sources:
+      - path: PetCam
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.matissegit.petcam
+        PRODUCT_NAME: PetCam
+        TARGETED_DEVICE_FAMILY: "1"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        SUPPORTS_MACCATALYST: NO
+        ENABLE_PREVIEWS: NO
+    info:
+      path: PetCam/Info.plist
+      properties:
+        CFBundleDisplayName: PetCam
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        ITSAppUsesNonExemptEncryption: false
+        LSRequiresIPhoneOS: true
+        UILaunchScreen: {}
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UIBackgroundModes:
+          - audio
+        NSMicrophoneUsageDescription: PetCam uses the microphone so you can talk through the camera's speaker.
+        NSPhotoLibraryUsageDescription: PetCam saves snapshots and clips to a PetCam album in Photos.
+        NSPhotoLibraryAddUsageDescription: PetCam saves snapshots and clips to Photos.
+        NSLocalNetworkUsageDescription: PetCam connects directly to your pet camera on your home network.
